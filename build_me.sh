@@ -3,7 +3,7 @@
 history="./hist_size.csv"
 
 basedir="$(basename `pwd`)"
-artifact="$(echo $basedir | sed 's/csd-genexus-//')"
+artifact="$(echo $basedir | sed 's/csd-genexus-pseudo-//')"
 state_now="$(cat state_now.dat)"
 
 echo "${artifact}"
