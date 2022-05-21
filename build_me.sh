@@ -1,13 +1,18 @@
 #!/bin/sh
 
-history="hist_size.csv"
+history="./hist_size.csv"
 
 basedir="$(basename `pwd`)"
 artifact="$(echo $basedir | sed 's/pseudo-//')"
 state_now="$(cat state_now.dat)"
 
+echo "${artifact}"
+echo "${state_now}"
+cat "${history}"
+
 for line in `grep "^${artifact}" "${history}"`
 do
+	echo "${line}"
 	match_to="$(echo $line | awk -F, '{print $8}')"
 	echo "${match_to}"
 	if [ ${match_to} == ${state_now} ]
