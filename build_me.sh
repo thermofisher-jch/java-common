@@ -24,8 +24,8 @@ do
 	echo "${match_to}"
 	if [[ ${match_to} == ${state_now} ]]
 	then
-		url="$(echo $line | awk -F, '{ print "ftp://lemon.itw/"$4"/AssayDev/TSDx/AssayDev/updates/"$1"_"$2"_"$3".deb" }')"
-		wget --ftp-user=anonymous "${url}"
+		url="$(echo $line | awk -F, '{ print "http://lemon.itw/"$4"/AssayDev/TSDx/AssayDev/updates/"$1"_"$2"_"$3".deb" }')"
+		wget "${url}"
 		file="$(basename ${url})"
 		echo $file | tee output.name
 		exit 0
