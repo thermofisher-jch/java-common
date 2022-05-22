@@ -28,8 +28,20 @@ do
 		wget "${url}"
 		file="$(basename ${url})"
 		file_name_length="$(($(echo ${file} | wc -c) - 1))"
-		echo "${file}" | head -${file_name_length}c | tee output.name
-		
+		build_output_name="$(echo "${file}" | head -"${file_name_length}c" | tee build_output_name.dat)"
+		# echo "${file}" | head -${file_name_length}c | tee output.name
+		cat > uploadBuildSpec.yaml << EOF
+{
+    "files": [
+        {
+            "pattern": "./${build_output_name}",
+	    "target": "csd-genexus-debian-dev/${build_output_name}",
+            "props": "test_prop=test_value;magic=wand;deb.distribution=bionic;deb.component=main;deb.architecture=amd64"
+        }
+    ]
+}
+EOF
+
 		exit 0
 	fi
 done
