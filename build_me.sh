@@ -27,7 +27,9 @@ do
 		url="$(echo $line | awk -F, '{ print "http://lemon.itw/"$4"/TSDx/AssayDev/updates/"$1"_"$2"_"$3".deb" }')"
 		wget "${url}"
 		file="$(basename ${url})"
-		echo $file | tee output.name
+		file_name_length="$(($(echo ${file} | wc -c) - 1))"
+		echo "${file}" | head -${file_name_length}c | tee output.name
+		
 		exit 0
 	fi
 done
